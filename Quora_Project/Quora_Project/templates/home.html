@@ -1,0 +1,30 @@
+{% extends 'index.html'%}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+    <div class="ques">
+        <p><b style="color: red;">NOTE : </b>login to like the answers in the belows posts</p><br>
+        {% for question in ques %}
+            <h2>{{forloop.counter}}) {{question}}</h2>
+            <h4>Posted by : {{question.user_id}}</h4>
+            <h4>Posted at : {{question.created_at}}</h4><br>
+            <hr color="black"><br>
+            {% for answer in question.answers_set.all %}
+                    <p><b>Answer : </b>{{ answer.answer }}</p>
+                    <p><b>Answered by: </b>{{ answer.user_id }}</p>
+                    <p><b>Likes: </b>{{ answer.total_likes }}</p>
+                    <p><b>Answered at : </b>{{ answer.created_at }}</p><br>
+
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'post_like' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" name="answer_id" value="{{answer.id}}">Like</button>
+                    </form>
+                    {% endif %}
+            {% endfor %}
+            <a href="{% url 'ans' question.id %}">Answer this question</a><br><br>
+            <hr color="black"><br>
+        {% endfor %}
+    </div>
+{% endblock %}

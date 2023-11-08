@@ -1,0 +1,18 @@
+{% extends 'index.html'%}
+{% block content %}
+
+    <h1>REGISTER</h1><br>
+    <form method="post">
+        {% csrf_token %}
+        <p>USERNAME : {{form.username}}</p><br>
+        <p>FIRST NAME : {{form.first_name}}</p><br>
+        <p>LAST NAME : {{form.last_name}}</p><br>
+        <p>E-MAIL: {{form.email}}</p><br>
+        <p>PASSWORD : {{form.password1}}</p><br>
+        <p>CONFIRM PASSWORD : {{form.password2}}</p><br>
+        <input type="submit" value="REGISTER"><br><br>
+
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quora</title>
+    <link rel="stylesheet" href="{% static "css/navbar.css" %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">Quora Application</a>
+        <ul class="nav-list">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'post' %}">Post a Question</a></li>
+        </ul>
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}"><button>Logout</button></a>
+            {% else %}
+                <a href="{% url 'register' %}"><button>Register</button></a>
+                <a href="{% url 'login' %}"><button>Login</button></a>
+            {% endif %}
+        </div>
+    </nav> 
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
